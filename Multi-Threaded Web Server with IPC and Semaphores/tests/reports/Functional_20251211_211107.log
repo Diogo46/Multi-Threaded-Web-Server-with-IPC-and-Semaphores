@@ -1,0 +1,117 @@
+
+[1;33m===================================[0m
+[1;33mFUNCTIONAL TESTS[0m
+[1;33m===================================[0m
+
+Testing server at: http://localhost:8080
+Start time: Thu Dec 11 21:11:07 WET 2025
+[0;32mServer is running at http://localhost:8080[0m
+
+[1;33m===================================[0m
+[1;33mTest 1: GET Request - HTML File[0m
+[1;33m===================================[0m
+
+
+[Test 1] GET /test.html - Expect 200 OK
+  [0;32m✓ PASSED[0m: HTML file returns 200 OK (Status: 200)
+  [0;32m✓ PASSED[0m: HTML content is correct
+
+[1;33m===================================[0m
+[1;33mTest 2: GET Request - CSS File[0m
+[1;33m===================================[0m
+
+
+[Test 2] GET /styles.css - Expect 200 OK
+  [0;32m✓ PASSED[0m: CSS file returns 200 OK (Status: 200)
+  [0;32m✓ PASSED[0m: CSS content is correct
+
+[1;33m===================================[0m
+[1;33mTest 3: GET Request - JavaScript File[0m
+[1;33m===================================[0m
+
+
+[Test 3] GET /script.js - Expect 200 OK
+  [0;32m✓ PASSED[0m: JavaScript file returns 200 OK (Status: 200)
+  [0;32m✓ PASSED[0m: JavaScript content is correct
+
+[1;33m===================================[0m
+[1;33mTest 4: GET Request - Text File[0m
+[1;33m===================================[0m
+
+
+[Test 4] GET /large_file.txt - Expect 200 OK
+  [0;32m✓ PASSED[0m: Text file returns 200 OK (Status: 200)
+  [0;32m✓ PASSED[0m: Text content is correct
+
+[1;33m===================================[0m
+[1;33mTest 5: HTTP Status Code - 404 Not Found[0m
+[1;33m===================================[0m
+
+
+[Test 5] GET /nonexistent.html - Expect 404
+  [0;32m✓ PASSED[0m: Non-existent file returns 404 (Status: 404)
+
+[Test 6] GET /fake/path/file.txt - Expect 404
+  [0;32m✓ PASSED[0m: Non-existent path returns 404 (Status: 404)
+
+[1;33m===================================[0m
+[1;33mTest 6: Directory Index Serving[0m
+[1;33m===================================[0m
+
+
+[Test 7] GET / - Expect 200 and index.html
+  [0;32m✓ PASSED[0m: Root directory returns 200 OK (Status: 200)
+
+[1;33m===================================[0m
+[1;33mTest 7: Subdirectory Index[0m
+[1;33m===================================[0m
+
+
+[Test 8] GET /subdir/ - Expect 200 and subdir/index.html
+  [0;32m✓ PASSED[0m: Subdirectory returns 200 OK (Status: 200)
+  [0;32m✓ PASSED[0m: Subdirectory index.html served
+
+[1;33m===================================[0m
+[1;33mTest 8: Content-Type Headers Verification[0m
+[1;33m===================================[0m
+
+
+[Test 9] Check Content-Type for HTML
+  [0;32m✓ PASSED[0m: HTML has correct Content-Type: text/html
+
+[Test 11] Check Content-Type for CSS
+  [0;32m✓ PASSED[0m: CSS has correct Content-Type: text/css
+
+[Test 13] Check Content-Type for JavaScript
+  [0;32m✓ PASSED[0m: JavaScript has correct Content-Type: application/javascript
+
+[Test 15] Check Content-Type for Text
+  [0;32m✓ PASSED[0m: Text has correct Content-Type: text/plain
+
+[1;33m===================================[0m
+[1;33mTest 9: HEAD Method Support[0m
+[1;33m===================================[0m
+
+
+[Test 17] HEAD /test.html - Should return headers only
+  [0;32m✓ PASSED[0m: HEAD method returns 200 OK
+
+[1;33m===================================[0m
+[1;33mTest 10: Multiple Requests - Same File[0m
+[1;33m===================================[0m
+
+
+[Test 19] Request same file 5 times - Test cache
+  [0;32m✓ PASSED[0m: All 5 requests successful (cache working)
+
+[1;33m===================================[0m
+[1;33mFUNCTIONAL TESTS SUMMARY[0m
+[1;33m===================================[0m
+
+Total Tests: 20
+[0;32mPassed: 19[0m
+[0;31mFailed: 0[0m
+End time: Thu Dec 11 21:11:07 WET 2025
+
+[0;32m✓ ALL FUNCTIONAL TESTS PASSED![0m
+

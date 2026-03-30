@@ -1,0 +1,160 @@
+╔══════════════════════════════════════════════════════════════════╗
+║          HTTP SERVER TEST SUITE - QUICK REFERENCE                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+┌─ SETUP ─────────────────────────────────────────────────────────┐
+│                                                                  │
+│  1. Install dependencies:                                        │
+│     sudo apt-get install curl apache2-utils valgrind bc          │
+│                                                                  │
+│  2. Start server (Terminal 1):                                   │
+│     cd /path/to/SO-Project-2                                     │
+│     ./server                                                     │
+│                                                                  │
+│  3. Run tests (Terminal 2):                                      │
+│     cd tests                                                     │
+│     ./run_all_tests.sh                                           │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ QUICK COMMANDS ────────────────────────────────────────────────┐
+│                                                                  │
+│  Run all tests:                                                  │
+│    ./run_all_tests.sh                                            │
+│                                                                  │
+│  Quick validation (fast):                                        │
+│    ./run_all_tests.sh --quick                                    │
+│                                                                  │
+│  Individual test suites:                                         │
+│    ./run_all_tests.sh --functional                               │
+│    ./run_all_tests.sh --concurrency                              │
+│    ./run_all_tests.sh --synchronization                          │
+│    ./run_all_tests.sh --stress                                   │
+│                                                                  │
+│  Run individual script directly:                                 │
+│    ./functional_tests.sh                                         │
+│    ./concurrency_tests.sh                                        │
+│    ./synchronization_tests.sh                                    │
+│    ./stress_tests.sh                                             │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ TEST SUITES ───────────────────────────────────────────────────┐
+│                                                                  │
+│  1. FUNCTIONAL TESTS (~30s)                                      │
+│     • GET requests (HTML, CSS, JS, TXT)                          │
+│     • HTTP status codes (200, 404)                               │
+│     • Directory indexes                                          │
+│     • Content-Type headers                                       │
+│     • HEAD method                                                │
+│                                                                  │
+│  2. CONCURRENCY TESTS (~2-3 min)                                 │
+│     • Apache Bench (1K & 10K requests)                           │
+│     • Parallel curl clients (50)                                 │
+│     • Connection stability (500 requests)                        │
+│     • 503 queue full handling                                    │
+│     • Statistics verification                                    │
+│                                                                  │
+│  3. SYNCHRONIZATION TESTS (~2 min)                               │
+│     • Log integrity                                              │
+│     • Cache consistency                                          │
+│     • Statistics accuracy                                        │
+│     • Deadlock detection                                         │
+│     + Manual: Helgrind, TSAN                                     │
+│                                                                  │
+│  4. STRESS TESTS (~7-8 min)                                      │
+│     • 5-minute continuous load                                   │
+│     • Resource monitoring                                        │
+│     • FD leak detection                                          │
+│     • Zombie process check                                       │
+│     + Manual: Valgrind, Graceful shutdown                        │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ MANUAL TESTS ──────────────────────────────────────────────────┐
+│                                                                  │
+│  HELGRIND (Race Condition Detection):                            │
+│    Terminal 1:                                                   │
+│      valgrind --tool=helgrind \                                  │
+│        --log-file=helgrind_output.txt ./server                   │
+│    Terminal 2:                                                   │
+│      for i in {1..100}; do curl localhost:8080/test.html; done   │
+│    Stop server, check: helgrind_output.txt                       │
+│                                                                  │
+│  THREAD SANITIZER (Data Race Detection):                         │
+│    make clean                                                    │
+│    CFLAGS='-fsanitize=thread -g -O1' \                           │
+│    LDFLAGS='-fsanitize=thread' make                              │
+│    ./server 2> tsan_output.txt                                   │
+│    (run some requests, stop, check tsan_output.txt)              │
+│                                                                  │
+│  VALGRIND (Memory Leaks):                                        │
+│    Terminal 1:                                                   │
+│      valgrind --leak-check=full \                                │
+│        --log-file=valgrind_memcheck.txt ./server                 │
+│    Terminal 2:                                                   │
+│      ab -n 1000 -c 50 http://localhost:8080/test.html            │
+│    Stop server, check: valgrind_memcheck.txt                     │
+│                                                                  │
+│  GRACEFUL SHUTDOWN:                                              │
+│    Terminal 1: ./server 2>&1 | tee shutdown_test.log             │
+│    Terminal 2: ab -n 10000 -c 100 localhost:8080/test.html       │
+│    While running, Ctrl+C in Terminal 1                           │
+│    Verify clean shutdown in shutdown_test.log                    │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ TROUBLESHOOTING ───────────────────────────────────────────────┐
+│                                                                  │
+│  Server not responding:                                          │
+│    • Check: curl http://localhost:8080                           │
+│    • Kill: pkill -f ./server                                     │
+│    • Port in use: netstat -tuln | grep 8080                      │
+│                                                                  │
+│  Tests timing out:                                               │
+│    • Check server logs: cat ../access.log                        │
+│    • Increase timeouts in test scripts                           │
+│    • Check for deadlocks (run with Helgrind)                     │
+│                                                                  │
+│  High failure rate:                                              │
+│    • Increase queue size in server.conf                          │
+│    • Increase threads_per_worker in server.conf                  │
+│    • Check system resources: top, free -h                        │
+│                                                                  │
+│  Memory issues:                                                  │
+│    • Run Valgrind to find leaks                                  │
+│    • Check cache settings in server.conf                         │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ RESULTS ───────────────────────────────────────────────────────┐
+│                                                                  │
+│  Test reports location:                                          │
+│    tests/reports/test_report_<timestamp>.txt                     │
+│    tests/reports/<suite>_<timestamp>.log                         │
+│                                                                  │
+│  Success criteria:                                               │
+│    ✓ Functional: 100% pass                                       │
+│    ✓ Concurrency: >95% success rate                             │
+│    ✓ No race conditions (Helgrind/TSAN)                          │
+│    ✓ No memory leaks (Valgrind)                                  │
+│    ✓ Stable for 5+ minutes                                       │
+│    ✓ No zombie processes                                         │
+│    ✓ Clean logs (no interleaving)                                │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌─ FILES TESTED ──────────────────────────────────────────────────┐
+│                                                                  │
+│  www/test.html          - HTML file                              │
+│  www/styles.css         - CSS file                               │
+│  www/script.js          - JavaScript file                        │
+│  www/large_file.txt     - Text file                              │
+│  www/index.html         - Root index                             │
+│  www/subdir/index.html  - Subdirectory index                     │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════
+For detailed information, see: tests/README.md
+═══════════════════════════════════════════════════════════════════

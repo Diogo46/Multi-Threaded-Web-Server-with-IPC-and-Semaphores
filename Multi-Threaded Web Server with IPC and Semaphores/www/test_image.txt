@@ -1,0 +1,2 @@
+FAKE_PNG_IMAGE_DATA_FOR_TESTING
+This simulates an image file for Content-Type testing

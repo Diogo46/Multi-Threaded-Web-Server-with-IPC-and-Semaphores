@@ -1,0 +1,11 @@
+# Server configuration
+# Lines are KEY=VALUE, comments start with #
+
+PORT=8081
+DOCUMENT_ROOT=./www
+NUM_WORKERS=2
+THREADS_PER_WORKER=4
+MAX_QUEUE_SIZE=100
+LOG_FILE=access.log
+#CACHE_SIZE_MB=64
+#TIMEOUT_SECONDS=30

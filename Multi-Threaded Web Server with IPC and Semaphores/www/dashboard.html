@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Server Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #b3d9ff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4ade80;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-title {
+            color: #667eea;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .card-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .card-unit {
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .card-secondary {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .chart-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .status-row:last-child {
+            border-bottom: none;
+        }
+        
+        .status-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .status-value {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .success { color: #4ade80; }
+        .warning { color: #facc15; }
+        .error { color: #f87171; }
+        
+        .refresh-info {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+        
+        .error-message {
+            background: #f87171;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="status-indicator"></span>HTTP Server Dashboard</h1>
+            <p>Real-time performance monitoring</p>
+        </div>
+        
+        <div id="error-container"></div>
+        
+        <div id="content" class="loading">
+            <p>Loading statistics...</p>
+        </div>
+    </div>
+    
+    <script>
+        async function fetchStats() {
+            try {
+                console.log('Fetching stats...');
+                const response = await fetch('/api/stats');
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    console.error('HTTP error, status:', response.status);
+                    throw new Error('Failed to fetch stats: HTTP ' + response.status);
+                }
+                const data = await response.json();
+                console.log('Stats received:', data);
+                return data;
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+                showError('Failed to load server statistics: ' + error.message);
+                return null;
+            }
+        }
+        
+        function showError(message) {
+            const container = document.getElementById('error-container');
+            container.innerHTML = `<div class="error-message">${message}</div>`;
+        }
+        
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+        }
+        
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+        
+        function updateDashboard(stats) {
+            if (!stats) return;
+            
+            const successRate = stats.total_requests > 0 ? 
+                (100 * (stats.successful_2xx / stats.total_requests)).toFixed(1) : 0;
+            const errorRate = stats.total_requests > 0 ?
+                (100 * ((stats.client_errors_4xx + stats.server_errors_5xx) / stats.total_requests)).toFixed(1) : 0;
+            
+            const content = `
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-title">Uptime</div>
+                        <div class="card-value">${formatUptime(stats.uptime_seconds)}</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Total Requests</div>
+                        <div class="card-value">${formatNumber(stats.total_requests)}</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Bytes Transferred</div>
+                        <div class="card-value">${formatBytes(stats.bytes_transferred)}</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Active Connections</div>
+                        <div class="card-value" style="color: ${stats.active_connections > 10 ? '#f87171' : '#667eea'}">
+                            ${stats.active_connections}
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Avg Response Time</div>
+                        <div class="card-value">${stats.avg_response_time_ms.toFixed(2)}<span class="card-unit"> ms</span></div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Cache Hit Rate</div>
+                        <div class="card-value">${stats.cache_hit_rate.toFixed(1)}<span class="card-unit">%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${stats.cache_hit_rate}%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-row">
+                    <div class="chart-card">
+                        <div class="chart-title">Request Distribution</div>
+                        <div class="status-row">
+                            <span class="status-label">2xx (Success)</span>
+                            <span class="status-value success">${formatNumber(stats.successful_2xx)} (${successRate}%)</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: #4ade80; width: ${successRate}%"></div>
+                        </div>
+                        
+                        <div class="status-row" style="margin-top: 15px;">
+                            <span class="status-label">4xx (Client Error)</span>
+                            <span class="status-value warning">${formatNumber(stats.client_errors_4xx)}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: #facc15; width: ${(100 * stats.client_errors_4xx / Math.max(stats.total_requests, 1)).toFixed(1)}%"></div>
+                        </div>
+                        
+                        <div class="status-row" style="margin-top: 15px;">
+                            <span class="status-label">5xx (Server Error)</span>
+                            <span class="status-value error">${formatNumber(stats.server_errors_5xx)}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: #f87171; width: ${(100 * stats.server_errors_5xx / Math.max(stats.total_requests, 1)).toFixed(1)}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-title">Cache Statistics</div>
+                        <div class="status-row">
+                            <span class="status-label">Cache Hits</span>
+                            <span class="status-value success">${formatNumber(stats.cache_hits)}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: #4ade80; width: ${stats.cache_hit_rate}%"></div>
+                        </div>
+                        
+                        <div class="status-row" style="margin-top: 15px;">
+                            <span class="status-label">Cache Misses</span>
+                            <span class="status-value warning">${formatNumber(stats.cache_misses)}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="background: #facc15; width: ${(100 - stats.cache_hit_rate)}%"></div>
+                        </div>
+                        
+                        <div class="card-secondary" style="margin-top: 15px; text-align: center;">
+                            Total Cache Accesses: ${formatNumber(stats.cache_hits + stats.cache_misses)}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="refresh-info">
+                    Auto-refreshing every 2 seconds • Last updated: ${new Date().toLocaleTimeString()}
+                </div>
+            `;
+            
+            document.getElementById('content').innerHTML = content;
+            document.getElementById('error-container').innerHTML = '';
+        }
+        
+        function formatUptime(seconds) {
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            if (days > 0) return `${days}d ${hours}h`;
+            if (hours > 0) return `${hours}h ${mins}m`;
+            if (mins > 0) return `${mins}m ${secs}s`;
+            return `${secs}s`;
+        }
+        
+        // Initial load
+        fetchStats().then(updateDashboard);
+        
+        // Refresh every 2 seconds
+        setInterval(async () => {
+            const stats = await fetchStats();
+            updateDashboard(stats);
+        }, 2000);
+    </script>
+</body>
+</html>

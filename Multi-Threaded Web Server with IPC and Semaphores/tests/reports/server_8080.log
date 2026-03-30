@@ -1,0 +1,397 @@
+[WORKER 0] started
+[WORKER 1] started
+[MASTER] Listening on port 8080...
+[CACHE] MISS ./www/index.html
+[CACHE] MISS ./www/favicon.ico
+[CACHE] MISS ./www/test.html
+[CACHE] MISS ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 31 seconds
+Total Requests: 10
+Successful (2xx): 9
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 4321
+Active Connections: 8
+Cache Hits: 6
+Cache Misses: 4
+Cache Hit Rate: 60.0%
+Avg Response Time: 11.76 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 61 seconds
+Total Requests: 18
+Successful (2xx): 17
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 8297
+Active Connections: 8
+Cache Hits: 14
+Cache Misses: 4
+Cache Hit Rate: 77.8%
+Avg Response Time: 6.65 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 92 seconds
+Total Requests: 26
+Successful (2xx): 25
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 12273
+Active Connections: 8
+Cache Hits: 22
+Cache Misses: 4
+Cache Hit Rate: 84.6%
+Avg Response Time: 4.67 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 123 seconds
+Total Requests: 34
+Successful (2xx): 33
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 16249
+Active Connections: 8
+Cache Hits: 30
+Cache Misses: 4
+Cache Hit Rate: 88.2%
+Avg Response Time: 3.64 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 153 seconds
+Total Requests: 42
+Successful (2xx): 41
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 20225
+Active Connections: 8
+Cache Hits: 38
+Cache Misses: 4
+Cache Hit Rate: 90.5%
+Avg Response Time: 2.99 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 184 seconds
+Total Requests: 50
+Successful (2xx): 49
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 24201
+Active Connections: 8
+Cache Hits: 46
+Cache Misses: 4
+Cache Hit Rate: 92.0%
+Avg Response Time: 2.56 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 214 seconds
+Total Requests: 58
+Successful (2xx): 57
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 28177
+Active Connections: 8
+Cache Hits: 54
+Cache Misses: 4
+Cache Hit Rate: 93.1%
+Avg Response Time: 2.23 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 245 seconds
+Total Requests: 66
+Successful (2xx): 65
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 32153
+Active Connections: 8
+Cache Hits: 62
+Cache Misses: 4
+Cache Hit Rate: 93.9%
+Avg Response Time: 1.99 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 276 seconds
+Total Requests: 74
+Successful (2xx): 73
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 36129
+Active Connections: 8
+Cache Hits: 70
+Cache Misses: 4
+Cache Hit Rate: 94.6%
+Avg Response Time: 1.80 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 306 seconds
+Total Requests: 82
+Successful (2xx): 81
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 40105
+Active Connections: 8
+Cache Hits: 78
+Cache Misses: 4
+Cache Hit Rate: 95.1%
+Avg Response Time: 1.64 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 337 seconds
+Total Requests: 90
+Successful (2xx): 89
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 44081
+Active Connections: 8
+Cache Hits: 86
+Cache Misses: 4
+Cache Hit Rate: 95.6%
+Avg Response Time: 1.51 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 368 seconds
+Total Requests: 98
+Successful (2xx): 97
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 48057
+Active Connections: 8
+Cache Hits: 94
+Cache Misses: 4
+Cache Hit Rate: 95.9%
+Avg Response Time: 1.41 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 399 seconds
+Total Requests: 106
+Successful (2xx): 105
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 52033
+Active Connections: 8
+Cache Hits: 102
+Cache Misses: 4
+Cache Hit Rate: 96.2%
+Avg Response Time: 1.32 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 429 seconds
+Total Requests: 114
+Successful (2xx): 113
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 56009
+Active Connections: 8
+Cache Hits: 110
+Cache Misses: 4
+Cache Hit Rate: 96.5%
+Avg Response Time: 1.25 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 460 seconds
+Total Requests: 115
+Successful (2xx): 114
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 56506
+Active Connections: 8
+Cache Hits: 111
+Cache Misses: 4
+Cache Hit Rate: 96.5%
+Avg Response Time: 1.24 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 491 seconds
+Total Requests: 123
+Successful (2xx): 122
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 60482
+Active Connections: 8
+Cache Hits: 119
+Cache Misses: 4
+Cache Hit Rate: 96.7%
+Avg Response Time: 1.17 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+
+=== SERVER STATISTICS ===
+Uptime: 522 seconds
+Total Requests: 131
+Successful (2xx): 130
+Client Errors (4xx): 1
+Server Errors (5xx): 0
+Bytes Transferred: 64458
+Active Connections: 8
+Cache Hits: 127
+Cache Misses: 4
+Cache Hit Rate: 96.9%
+Avg Response Time: 1.12 ms
+=========================
+
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html
+[CACHE] HIT ./www/test.html

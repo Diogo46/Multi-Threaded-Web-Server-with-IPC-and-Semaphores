@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "<html>"
+echo "<head><title>CGI Test</title></head>"
+echo "<body>"
+echo "<h1>Hello from CGI!</h1>"
+echo "<p>This is a test CGI script.</p>"
+echo "<p>Request Method: $REQUEST_METHOD</p>"
+echo "<p>Query String: ${QUERY_STRING:-empty}</p>"
+echo "<p>Script Name: $SCRIPT_NAME</p>"
+echo "</body>"
+echo "</html>"
